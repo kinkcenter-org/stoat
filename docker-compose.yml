@@ -182,7 +182,8 @@ services:
       "
   cloudflared:
     image: cloudflare/cloudflared:latest
-    container_name: hooks-cloudflared-hooks
+    depends_on:
+      - caddy
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=eyJhIjoiNDQ4ZGUzMmRjNWM3NDhlMGQ5NjYxYmQxNWI3MjI1NGMiLCJ0IjoiNzY4OTMyNGEtODZjZi00ZTQ1LWIwZGMtODdiOGQxZTU1Y2RmIiwicyI6IllXRm1aV1UwWkRZdE5UWTVOUzAwWXpOa0xUazROVEF0WW1VMU5tRmhNbU5sT0daaiJ9
