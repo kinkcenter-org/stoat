@@ -79,6 +79,8 @@ services:
         condition: service_started
       rabbit:
         condition: service_healthy
+    environment:
+      - ROCKET_LOG_LEVEL=debug
     volumes:
       - type: bind
         source: ./Revolt.toml
