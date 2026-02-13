@@ -65,7 +65,6 @@ services:
     env_file: .env.web
     ports:
       - "9080:80"
-      - "9443:443"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ./data/caddy-data:/data
