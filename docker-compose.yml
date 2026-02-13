@@ -180,9 +180,8 @@ services:
       /usr/bin/mc mb minio/revolt-uploads;
       exit 0;
       "
-  cloudflared-hooks:
+  cloudflared:
     image: cloudflare/cloudflared:latest
-    profiles: ["hooks"]
     container_name: hooks-cloudflared-hooks
     command: tunnel run
     environment:
