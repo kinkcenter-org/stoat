@@ -180,20 +180,20 @@ services:
       /usr/bin/mc mb minio/revolt-uploads;
       exit 0;
       "
-cloudflared-hooks:
-  image: cloudflare/cloudflared:latest
-  profiles: ["hooks"]
-  container_name: hooks-cloudflared-hooks
-  command: tunnel run
-  environment:
-    - TUNNEL_TOKEN=eyJhIjoiNDQ4ZGUzMmRjNWM3NDhlMGQ5NjYxYmQxNWI3MjI1NGMiLCJ0IjoiNzY4OTMyNGEtODZjZi00ZTQ1LWIwZGMtODdiOGQxZTU1Y2RmIiwicyI6IllXRm1aV1UwWkRZdE5UWTVOUzAwWXpOa0xUazROVEF0WW1VMU5tRmhNbU5sT0daaiJ9
-    - TUNNEL_RETRIES=5
-    - TUNNEL_REGION=us
-    - NO_AUTOUPDATE=0
-    - TUNNEL_LOGLEVEL=info
-  healthcheck:
-    test: curl --fail https://hooks.kinkcenter.org/ping  || exit 1
-    interval: 300s
-    timeout: 5s
-    retries: 1
-  restart: unless-stopped
+  cloudflared-hooks:
+    image: cloudflare/cloudflared:latest
+    profiles: ["hooks"]
+    container_name: hooks-cloudflared-hooks
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=eyJhIjoiNDQ4ZGUzMmRjNWM3NDhlMGQ5NjYxYmQxNWI3MjI1NGMiLCJ0IjoiNzY4OTMyNGEtODZjZi00ZTQ1LWIwZGMtODdiOGQxZTU1Y2RmIiwicyI6IllXRm1aV1UwWkRZdE5UWTVOUzAwWXpOa0xUazROVEF0WW1VMU5tRmhNbU5sT0daaiJ9
+      - TUNNEL_RETRIES=5
+      - TUNNEL_REGION=us
+      - NO_AUTOUPDATE=0
+      - TUNNEL_LOGLEVEL=info
+    healthcheck:
+      test: curl --fail https://hooks.kinkcenter.org/ping  || exit 1
+      interval: 300s
+      timeout: 5s
+      retries: 1
+    restart: unless-stopped
