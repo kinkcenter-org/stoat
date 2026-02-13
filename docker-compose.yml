@@ -58,17 +58,18 @@ services:
           - emojis.minio
     restart: always
 
-  # Caddy: Web server
-  caddy:
-    image: docker.io/caddy
-    restart: always
-    env_file: .env.web
+  # Nginx Proxy
+  nginx:
+    image: nginx:alpine
     ports:
-      - "9080:80"
+      - "8080:80"
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - ./data/caddy-data:/data
-      - ./data/caddy-config:/config
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api
+      - events
+      - web
+    restart: always
 
   # API server
   api:
@@ -185,7 +186,7 @@ services:
   cloudflared:
     image: cloudflare/cloudflared:latest
     depends_on:
-      - caddy
+      - nginx
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=eyJhIjoiNDQ4ZGUzMmRjNWM3NDhlMGQ5NjYxYmQxNWI3MjI1NGMiLCJ0IjoiNzY4OTMyNGEtODZjZi00ZTQ1LWIwZGMtODdiOGQxZTU1Y2RmIiwicyI6IllXRm1aV1UwWkRZdE5UWTVOUzAwWXpOa0xUazROVEF0WW1VMU5tRmhNbU5sT0daaiJ9
